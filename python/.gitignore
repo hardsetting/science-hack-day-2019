@@ -1,7 +1,3 @@
-# Our projects gitignore #
-pokemon/*
-!pokemon/README
-
 ###### Google: Python gitignore #######
 # Byte-compiled / optimized / DLL files
 __pycache__/
