@@ -11,7 +11,7 @@ import csv
 from itertools import islice
 
 
-repo_path = 'C:\\Users\\gabriele\\workspace\\science-hack-day-2019'
+repo_path = 'C:\\Users\\gabriele\\workspace\\sfhack19\\python'
 
 with open(join(repo_path, 'pokemon.csv')) as csvfile:
     reader = csv.reader(csvfile, delimiter=',')
@@ -82,7 +82,7 @@ def render(cam, dst_path, width, height):
 def main():
     output_folder = 'C:\\Users\\gabriele\\Desktop\\renders'
     path_iterator = load_paths()
-    path_iterator = islice(path_iterator, 0, 150)
+    path_iterator = islice(path_iterator, 0, 300)
 
     for idx, model_path in path_iterator:
         # model_path = "C:/Users/gabriele/Downloads/3DS - Pokemon Omega Ruby Alpha Sapphire - 018 Pidgeot/Pokemon XY/Pidgeot/Pidgeot.FBX"

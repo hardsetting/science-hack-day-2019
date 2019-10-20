@@ -20,8 +20,11 @@ def random_in(a, b):
 
 def tiled_sample(sequence):
     while True:
-        for x in random.sample(sequence, len(sequence)):
-            yield x
+        if len(sequence) == 0:
+            yield None
+        else:
+            for x in random.sample(sequence, len(sequence)):
+                yield x
 
 # endregion
 
@@ -41,7 +44,11 @@ def get_crop_from_idx(renders, idx):
     :param idx: pokedex number of the pokemon
     :return: random generated crop
     """
-    img: Image = renders[4][0]['img']
+    if len(renders[idx]) == 0:
+        return None
+
+    data = random.sample(renders[idx], 1)[0]
+    img: Image = data['img']
     w, h = img.size
     tw = random_in(200, 300)
     th = random_in(200, 300)
@@ -59,8 +66,11 @@ def generator(renders):
     :param renders: dataset of renders
     :return: a random crop generator
     """
-    types = grouped_ids.keys()
-    samplers = {t: tiled_sample(grouped_ids[t]) for t in types}
+    ids_we_have = renders.keys()
+    grouped_ids_we_have = {k: [i for i in ids if i in ids_we_have] for k, ids in grouped_ids.items()}
+
+    types = [k for k, ids in grouped_ids_we_have.items() if len(ids) > 0]
+    samplers = {t: tiled_sample(grouped_ids_we_have[t]) for t in types}
     ids_sampler = zip(*samplers.values())
     ids_sampler = (dict(zip(types, v)) for v in ids_sampler)
 
@@ -77,7 +87,7 @@ def load_renders(renders_path):
     images = defaultdict(list)
 
     subfolders = os.listdir(renders_path)
-    for sf in subfolders:
+    for sf in islice(subfolders, 0, 12):
         renders = os.listdir(join(renders_path, sf))
         for render in renders:
             render = join(renders_path, sf, render)

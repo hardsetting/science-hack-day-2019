@@ -157,7 +157,7 @@
 659 "pokemon\659\Pokemon XY\Bunnelby\Bunnelby.FBX"
 662 "pokemon\662\Pokemon XY\Fletchinder\Fletchinder.FBX"
 663 "pokemon\663\Pokemon XY\Talonflame\Talonflame.FBX"
-667 "pokemon\667\Pokemon XY\Litleo\Litleo.DAE"
+667 "pokemon\667\Pokemon XY\Litleo\Litleo.FBX"
 668 "pokemon\668\Pokemon XY\Pyroar\PyroarM.FBX"
 672 "pokemon\672\Pokemon XY\Skiddo\Skiddo.FBX"
 673 "pokemon\673\Pokemon XY\Gogoat\Gogoat.FBX"
