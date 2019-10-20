@@ -103,7 +103,7 @@ def load_renders(renders_path):
 
 def get_render_folders(renders_path):
     subfolders = os.listdir(renders_path)
-    for sf in islice(subfolders, 0, 12):
+    for sf in subfolders:
         renders = os.listdir(join(renders_path, sf))
         renders = [join(sf, render) for render in renders]
         yield int(sf), renders
@@ -116,7 +116,7 @@ def load_renders_iter(renders_path):
     :return: complete dataset of renders
     """
     subfolders = os.listdir(renders_path)
-    for sf in islice(subfolders, 0, 12):
+    for sf in subfolders:
         renders = os.listdir(join(renders_path, sf))
         for render in renders:
             render = join(renders_path, sf, render)
