@@ -1,7 +1,6 @@
 # Our projects gitignore #
-scraper/pokemon/*
-!scraper/pokemon/README
-!flutter/*
+pokemon/*
+!pokemon/README
 
 ###### Google: Python gitignore #######
 # Byte-compiled / optimized / DLL files
