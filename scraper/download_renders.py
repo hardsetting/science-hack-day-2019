@@ -31,7 +31,8 @@ def main():
 
         pokemon_path = path + pokemon[0]
         pokemon_filename = path + pokemon[0] + '/' + pokemon[1] + '.zip'
-        print(pokemon_path)
+        # Debugging in case you want to see what you're downloading
+        # print(pokemon_path)
         try:
             os.mkdir(pokemon_path)
             urllib.request.urlretrieve(pokemon[2], pokemon_filename)
