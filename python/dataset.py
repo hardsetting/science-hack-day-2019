@@ -87,7 +87,7 @@ def load_renders(renders_path):
     images = defaultdict(list)
 
     subfolders = os.listdir(renders_path)
-    for sf in islice(subfolders, 0, 12):
+    for sf in subfolders:
         renders = os.listdir(join(renders_path, sf))
         for render in renders:
             render = join(renders_path, sf, render)
@@ -101,17 +101,44 @@ def load_renders(renders_path):
     return images
 
 
+def get_render_folders(renders_path):
+    subfolders = os.listdir(renders_path)
+    for sf in islice(subfolders, 0, 12):
+        renders = os.listdir(join(renders_path, sf))
+        renders = [join(sf, render) for render in renders]
+        yield int(sf), renders
+
+
+def load_renders_iter(renders_path):
+    """
+    Allocate the full renders dataset into memory
+    :param renders_path: path to renders
+    :return: complete dataset of renders
+    """
+    subfolders = os.listdir(renders_path)
+    for sf in islice(subfolders, 0, 12):
+        renders = os.listdir(join(renders_path, sf))
+        for render in renders:
+            render = join(renders_path, sf, render)
+            img = Image.open(render)
+            img.load()  # required for png.split()
+            no_alpha = Image.new("RGB", img.size, (255, 255, 255))
+            no_alpha.paste(img, mask=img.split()[3])  # 3 is the alpha channel
+
+            yield int(sf), render, no_alpha
+
+
 @click.command()
 @click.argument('renders_path')
 def test(renders_path):
     renders = load_renders(renders_path)
     gen = generator(renders)
 
-    for vals in islice(gen, 0, 5):
+    for vals in gen:
         for t, img in vals.items():
             im = Image.fromarray(img)
             im.show('Crop')
-            break
+        input()
 
 
 if __name__ == '__main__':
