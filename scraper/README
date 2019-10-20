@@ -1,0 +1,2 @@
+To scape the site: `python3 scrape.py`
+To download and unzip all pokemon: `python3 download_renders.py`
